@@ -23,6 +23,14 @@ pipeline {
                 }
             }
         }
+        
+        stage("Deploy to Render") {
+            steps {
+                script {
+                    sh 'node server.js'
+                }
+            }
+        }
 
         // stage("Run Tests") {
         //     steps {
@@ -32,12 +40,6 @@ pipeline {
         //     }
         // }
 
-        stage("Deploy to Render") {
-            steps {
-                script {
-                    sh 'node server.js'
-                }
-            }
-        }
+
     }
 }
