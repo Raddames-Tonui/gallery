@@ -23,22 +23,22 @@ pipeline {
                 }
             }
         }
-        
-        stage("Deploy to Render") {
-            steps {
-                script {
-                    sh 'node server.js'
-                }
-            }
-        }
 
-        // stage("Run Tests") {
+        // stage("Deploy to Render") {
         //     steps {
         //         script {
-        //             sh 'npm test'
+        //             sh 'node server.js'
         //         }
         //     }
         // }
+
+        stage("Run Tests") {
+            steps {
+                script {
+                    sh 'npm test'
+                }
+            }
+        }
 
 
     }
