@@ -1,16 +1,20 @@
 pipeline {
     agent any
 
-    tools{
-        nodejs "node"
+    tools {
+        nodejs "node" // Use the Node.js tool named "node" configured in Jenkins
+    }
+
+    environment {
+        EMAIL_RECIPIENT = 'raddames.tonui1@student.moringaschool.com'
     }
 
     triggers {
-        githubPush()  
+        githubPush() // Trigger the pipeline on a GitHub push event
     }
 
     stages {
-        stage("Clone repository") {
+        stage("Clone Repository") {
             steps {
                 git branch: "master", url: "https://github.com/Raddames-Tonui/gallery"
             }
@@ -18,28 +22,25 @@ pipeline {
 
         stage("Install Dependencies") {
             steps {
-                script {
-                    sh 'npm install'
-                }
+                sh 'npm install'
             }
         }
-
-        // stage("Deploy to Render") {
-        //     steps {
-        //         script {
-        //             sh 'node server.js'
-        //         }
-        //     }
-        // }
 
         stage("Run Tests") {
             steps {
-                script {
-                    sh 'npm test'
-                }
+                sh 'npm test'
             }
         }
+    }
 
-
+    post {
+        failure {
+            mail to: "${EMAIL_RECIPIENT}",
+                 subject: 'Test Failure Notification',
+                 body: 'The tests have failed in the Jenkins pipeline for the "master" branch.'
+        }
+        always {
+            echo 'Pipeline execution complete'
+        }
     }
 }
