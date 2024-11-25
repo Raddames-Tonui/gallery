@@ -7,6 +7,7 @@ pipeline {
 
     environment {
         EMAIL_RECIPIENT = 'raddames.tonui1@student.moringaschool.com'
+        RENDER_DEPLOY_HOOK = 'https://api.render.com/deploy/srv-ct1p9qt6l47c73bhmn2g?key=QwAZutc-BIo'
     }
 
     triggers {
@@ -35,6 +36,7 @@ pipeline {
         stage("Deploy to Render") {
             steps {
                 echo 'Deploying application to Render...'
+                sh "curl -X POST ${RENDER_DEPLOY_HOOK}"
             }
         }
     }
