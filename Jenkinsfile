@@ -22,7 +22,7 @@ pipeline {
 
         stage("Install Dependencies") {
             steps {
-                sh 'npm instal'
+                sh 'npm installing'
             }
         }
 
