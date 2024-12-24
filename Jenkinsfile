@@ -43,7 +43,7 @@ pipeline {
 
     post {
         success {
-            echo 'Pipeline completed successfully!'
+            echo 'Pipeline completed successfully!!'
         }
         failure {
             mail to: "${EMAIL_RECIPIENT}",
@@ -51,7 +51,7 @@ pipeline {
                  body: 'The pipeline failed at some stage. Please check Jenkins logs for details.'
         }
         always {
-            echo 'Pipeline execution complete'
+            echo 'Pipeline execution complete!!'
         }
     }
 }
