@@ -44,6 +44,8 @@ pipeline {
     post {
         success {
             echo 'Pipeline completed successfully!!'
+            sh ./performCleanUp.sh
+
         }
         failure {
             mail to: "${EMAIL_RECIPIENT}",
@@ -52,6 +54,10 @@ pipeline {
         }
         always {
             echo 'Pipeline execution complete!!'
+
+        }
+        aborted {
+            echo 'Pipeline execution aborted!!' 
         }
     }
 }
